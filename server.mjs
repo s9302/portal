@@ -162,11 +162,13 @@ function fetchCluster() {
   return cluster.pending;
 }
 
+// TLS is verified: every probe target has a real certificate (tailscale serve or
+// Cloudflare), so a cert error now shows up as the service being down.
 function probeHttp(url) {
   return new Promise((resolve) => {
     const t0 = performance.now();
     const mod = url.startsWith('https:') ? https : http;
-    const req = mod.request(url, { method: 'GET', timeout: 6000, rejectUnauthorized: false, headers: { 'user-agent': 'homelab-portal' } }, (r) => {
+    const req = mod.request(url, { method: 'GET', timeout: 6000, headers: { 'user-agent': 'homelab-portal' } }, (r) => {
       r.resume();
       const ms = Math.round(performance.now() - t0);
       // Any HTTP answer below 500 means the service is up (401/302 are login walls).
