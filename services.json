@@ -1,0 +1,137 @@
+[
+  {
+    "group": "Infrastructure",
+    "name": "Proxmox",
+    "desc": "Hypervisor node 1",
+    "url": "https://proxmox.tailnet-name.ts.net",
+    "check": {
+      "http": "https://proxmox.tailnet-name.ts.net"
+    }
+  },
+  {
+    "group": "Infrastructure",
+    "name": "pve2",
+    "desc": "Hypervisor node 2",
+    "url": "https://pve2.tailnet-name.ts.net",
+    "check": {
+      "http": "https://pve2.tailnet-name.ts.net"
+    }
+  },
+  {
+    "group": "Infrastructure",
+    "name": "pve3",
+    "desc": "Hypervisor node 3",
+    "url": "https://pve3.tailnet-name.ts.net",
+    "check": {
+      "http": "https://pve3.tailnet-name.ts.net"
+    }
+  },
+  {
+    "group": "Infrastructure",
+    "name": "Pi-hole",
+    "desc": "DNS and ad blocking",
+    "url": "https://pihole.tailnet-name.ts.net/admin/",
+    "check": {
+      "http": "https://pihole.tailnet-name.ts.net/admin/"
+    }
+  },
+  {
+    "group": "Monitoring",
+    "name": "Grafana",
+    "desc": "Prometheus dashboards",
+    "url": "https://monitor.tailnet-name.ts.net",
+    "check": {
+      "http": "https://monitor.tailnet-name.ts.net/api/health"
+    }
+  },
+  {
+    "group": "Monitoring",
+    "name": "Langfuse",
+    "desc": "Claude and GLM session traces",
+    "url": "https://langfuse.tailnet-name.ts.net",
+    "check": {
+      "http": "https://langfuse.tailnet-name.ts.net/api/public/health"
+    }
+  },
+  {
+    "group": "Monitoring",
+    "name": "Uptime Kuma",
+    "desc": "Availability checks",
+    "url": "https://uptime.tailnet-name.ts.net",
+    "check": {
+      "http": "https://uptime.tailnet-name.ts.net"
+    }
+  },
+  {
+    "group": "Monitoring",
+    "name": "Wazuh",
+    "desc": "SIEM dashboard",
+    "url": "https://wazuh.tailnet-name.ts.net",
+    "check": {
+      "http": "https://wazuh.tailnet-name.ts.net"
+    }
+  },
+  {
+    "group": "Apps",
+    "name": "Vaultwarden",
+    "desc": "Password vault",
+    "url": "https://vaultwarden.tailnet-name.ts.net",
+    "check": {
+      "http": "https://vaultwarden.tailnet-name.ts.net"
+    }
+  },
+  {
+    "group": "Apps",
+    "name": "Nextcloud",
+    "desc": "Files",
+    "url": "https://nextcloud.tailnet-name.ts.net",
+    "check": {
+      "http": "https://nextcloud.tailnet-name.ts.net"
+    }
+  },
+  {
+    "group": "Apps",
+    "name": "RomM",
+    "desc": "ROM library",
+    "url": "https://romm.tailnet-name.ts.net",
+    "check": {
+      "http": "https://romm.tailnet-name.ts.net"
+    }
+  },
+  {
+    "group": "Apps",
+    "name": "Sunshine (xemu)",
+    "desc": "Game streaming host",
+    "url": "https://xemu.tailnet-name.ts.net",
+    "check": {
+      "http": "https://xemu.tailnet-name.ts.net"
+    }
+  },
+  {
+    "group": "Public",
+    "name": "spencersmith.win",
+    "desc": "Personal website",
+    "url": "https://spencersmith.win",
+    "check": {
+      "http": "https://spencersmith.win"
+    }
+  },
+  {
+    "group": "Public",
+    "name": "Site stats",
+    "desc": "GoAccess report",
+    "url": "https://web.tailnet-name.ts.net",
+    "check": {
+      "http": "https://web.tailnet-name.ts.net"
+    }
+  },
+  {
+    "group": "Public",
+    "name": "Wizard Academy",
+    "desc": "Multiplayer game",
+    "url": "https://wizardgame.spencersmith.win",
+    "check": {
+      "http": "https://wizardgame.spencersmith.win"
+    }
+  }
+]

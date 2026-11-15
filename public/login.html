@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Homelab · Log in</title>
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="manifest" href="/manifest.json">
+<link rel="apple-touch-icon" href="/icon-180.png">
+<meta name="theme-color" content="#0d1117">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Homelab">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<link rel="stylesheet" href="/style.css">
+</head>
+<body class="login-page">
+<form class="login-card" id="login">
+  <div class="brand"><span class="logo">&gt;_</span> homelab</div>
+  <a class="sso-btn" href="/auth/login">Sign in with Authentik</a>
+  <div class="or muted small">or use the backup password</div>
+  <input type="password" id="password" placeholder="Password" autocomplete="current-password" required>
+  <button type="submit">Log in</button>
+  <p class="error" id="error"></p>
+</form>
+<script src="/login.js"></script>
+</body>
+</html>

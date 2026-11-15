@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Homelab</title>
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="manifest" href="/manifest.json">
+<link rel="apple-touch-icon" href="/icon-180.png">
+<meta name="theme-color" content="#0d1117">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Homelab">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<header class="topbar">
+  <div class="brand"><span class="logo">&gt;_</span> homelab</div>
+  <nav class="tabs" role="tablist">
+    <button class="tab active" data-view="overview" role="tab">Overview</button>
+    <button class="tab" data-view="claude" role="tab">Claude</button>
+    <button class="tab" data-view="glm" role="tab">GLM</button>
+  </nav>
+  <button id="chat-toggle" class="ghost small chat-toggle" type="button" title="Hide or show the AI panel">Hide AI</button>
+  <div class="me"><span id="me"></span><button id="logout" class="ghost small">Log out</button></div>
+</header>
+
+<main class="layout" id="layout" data-view="overview">
+  <section class="overview" id="overview">
+    <div class="section-head">
+      <h2>Nodes</h2>
+      <span class="muted small" id="updated"></span>
+    </div>
+    <div class="nodes" id="nodes"></div>
+
+    <div class="section-head"><h2>Services</h2><span class="muted small" id="svc-summary"></span></div>
+    <div id="services"></div>
+
+    <div class="section-head"><h2>Guests</h2><span class="muted small" id="guest-summary"></span></div>
+    <div class="table-wrap">
+      <table class="guests">
+        <thead><tr><th>ID</th><th>Name</th><th>Node</th><th>Type</th><th>CPU</th><th>Memory</th><th>Uptime</th></tr></thead>
+        <tbody id="guests"></tbody>
+      </table>
+    </div>
+
+    <div class="section-head"><h2>Storage</h2></div>
+    <div class="storage" id="storage"></div>
+  </section>
+
+  <section class="claude" id="claude">
+    <div class="chat-head">
+      <button id="sessions-btn" class="ghost" title="Sessions">☰</button>
+      <div class="chat-title" id="chat-title">New session</div>
+      <button id="files-btn" class="ghost small" title="Uploaded files">Files</button>
+      <button id="new-btn" class="small">New</button>
+      <button class="ghost small chat-min" type="button" title="Minimize the AI panel">–</button>
+    </div>
+
+    <div class="drawer hidden" id="sessions-drawer">
+      <div class="drawer-head"><strong>Sessions</strong><button class="ghost small" data-close="sessions-drawer">Close</button></div>
+      <ul class="session-list" id="session-list"></ul>
+    </div>
+
+    <div class="drawer hidden" id="files-drawer">
+      <div class="drawer-head"><strong>Uploaded files</strong><span class="muted small">~/uploads</span><button class="ghost small" data-close="files-drawer">Close</button></div>
+      <label class="dropzone" id="drawer-drop">Drop files here or tap to upload<input type="file" id="drawer-input" multiple hidden></label>
+      <ul class="file-list" id="file-list"></ul>
+    </div>
+
+    <div class="messages" id="messages">
+      <div class="empty" id="empty">
+        <p><strong>Talk to Claude</strong></p>
+        <p class="muted">Start a new session or pick one from ☰. Claude runs here on claude-agent with the same access as your terminal sessions, in auto permission mode.</p>
+      </div>
+    </div>
+
+    <div class="warn hidden" id="busy-warn"></div>
+
+    <form class="composer" id="composer">
+      <div class="attachments" id="attachments"></div>
+      <textarea id="input" rows="2" placeholder="Message Claude…  (Enter to send, Shift+Enter for newline)"></textarea>
+      <div class="composer-row">
+        <label class="ghost small attach-btn" title="Attach files">📎 Attach<input type="file" id="attach-input" multiple hidden></label>
+        <select id="model" title="Model">
+          <option value="">Default model</option>
+          <option value="opus">Opus</option>
+          <option value="sonnet">Sonnet</option>
+          <option value="haiku">Haiku</option>
+        </select>
+        <span class="status-pill hidden" id="run-status"></span>
+        <span class="spacer"></span>
+        <button type="button" id="stop-btn" class="danger hidden">Stop</button>
+        <button type="submit" id="send-btn">Send</button>
+      </div>
+    </form>
+    <div class="drop-overlay hidden" id="drop-overlay">Drop to attach</div>
+  </section>
+
+  <section class="glm" id="glm">
+    <div class="chat-head">
+      <div class="chat-title">GLM on Modal</div>
+      <select id="glm-convos" class="small" title="Reopen a past GLM conversation"></select>
+      <button id="glm-new" class="small" type="button">New</button>
+      <button id="glm-delete" class="small" type="button" title="Delete this conversation">Delete</button>
+      <button class="ghost small chat-min" type="button" title="Minimize the AI panel">–</button>
+    </div>
+    <div class="vm-bar">
+      <span class="dot stopped" id="vm-dot"></span>
+      <span class="vm-state" id="vm-state">Checking the VM…</span>
+      <button id="vm-start" class="ghost small" type="button">Start VM</button>
+      <button id="vm-stop" class="ghost small hidden" type="button">Stop</button>
+      <button id="vm-reset" class="ghost small" type="button">Reset</button>
+    </div>
+    <div class="messages" id="glm-messages"></div>
+    <form class="composer" id="glm-composer">
+      <textarea id="glm-input" rows="2" placeholder="Message GLM…  (Enter to send, Shift+Enter for newline)"></textarea>
+      <div class="composer-row">
+        <label class="small vm-tools" title="Let the model run commands and edit files on the sandbox VM"><input type="checkbox" id="glm-tools"> VM tools</label>
+        <span class="status-pill hidden" id="glm-status"></span>
+        <span class="spacer"></span>
+        <button type="button" id="glm-stop" class="danger hidden">Stop</button>
+        <button type="submit" id="glm-send">Send</button>
+      </div>
+    </form>
+  </section>
+</main>
+<script src="/app.js" type="module"></script>
+<script src="/glm.js" type="module"></script>
+</body>
+</html>
